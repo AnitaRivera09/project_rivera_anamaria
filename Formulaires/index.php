@@ -16,10 +16,10 @@
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" href="../CSS/font.css">
+    <link rel="stylesheet" href="../CSS/template.css">
+    <link rel="stylesheet" href="../CSS/owl.css">
+    <link rel="stylesheet" href="../CSS/box.css">
 <!--
 
 TemplateMo 569 Edu Meeting
