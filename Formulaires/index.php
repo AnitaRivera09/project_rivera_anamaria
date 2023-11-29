@@ -5,32 +5,31 @@
 <title>Magasin · Riveranis</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="../CSS/page_index.css" rel="stylesheet" type="text/css" />
+<link href="../CSS/page_index.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="templatemo_container">
   <div class="templatemo_space"></div>
   <div id="templatemo_body">
     <div id="templatemo_header">
-      <div id="templatemo_site_title">FLORAL <span id="templatemo_site_title2">BLOG WEBSITE</span></div>
-      <div id="templatemo_slogan">Free CSS Template provided by TemplateMo</div>
+      <div id="templatemo_site_title">Magasin <span id="templatemo_site_title2">RIVERANIS</span></div>
+      <div id="templatemo_slogan">Un site réalisé par des femmes, pour les femmes !</div>
       </div>
        <div class="templatemo_link"><ul>
-		 <li><a href="#">Main Page</a></li>
-		 <li><a href="#">About Us</a></li>
-		 <li><a href="#">Flowers</a></li>
-         <li><a href="#">Blog</a></li>
-         <li><a href="#">Forum</a></li>
-         <li><a href="#">Gallery</a></li>
-         <li><a href="#">Contact Us</a></li>
+		 <li><a href="#">Page principal</a></li>
+		 <li><a href="#">À propos de nous</a></li>
+		 <li><a href="#">Des offres</a></li>
+         <li><a href="#">Maquillage</a></li>
+         <li><a href="#">Crèmes</a></li>
+         <li><a href="#">Accessoires</a></li>
+         <li><a href="#">Contactez-nous</a></li>
         </ul> 
     </div>
     <p>&nbsp;</p>
-    <h1>Free CSS Website Template</h1>
-    <div class="templatemo_text_area"><img src="images/templatemo_pic.jpg" alt="templatemo.com" width="192" height="147" />
-      <p>This is a free CSS  template provided by <a href="#">TemplateMo</a> website. You may download, modify and apply this CSS layout for your personal or business websites. Credit goes to <a rel="nofollow" href="http://www.pdphoto.org" target="_blank">PDPhoto.org</a> for photos.</p>
-      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc quis sem nec tellus blandit tincidunt. Duis vitae velit sed dui malesuada dignissim. Donec mollis aliquet ligula. Maecenas adipiscing elementum ipsum. Pellentesque vitae magna. Sed nec est.</p>
-      <p>Mauris convallis. Proin vel libero id erat venenatis accumsan. Nunc blandit orci sit amet risus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut iaculis lacinia purus. Duis pulvinar scelerisque ante. Morbi tristique, risus quis congue pulvinar, nisl nisi commodo diam, a porta nisi ligula ac massa. Vestibulum blandit lacus sed sapien.</p>
+    <h1>Bienvenue à Notre Magasin</h1>
+    <div class="templatemo_text_area"><img src="../Images/templatemo_pic.jpg" alt="templatemo.com" width="192" height="147" />
+      <p>Ceci est un site conçu pour vous !. Profitez de nos produits et de nos promotions, spécialement conçus pour vous !</p>
+      <p>Vous trouverez ici les meilleurs produits de beauté pour que vous vous sentiez plus belle que jamais.</p>
     </div>
     <div id="templatemo_bottom">
       <div class="templatemo_mid1">
