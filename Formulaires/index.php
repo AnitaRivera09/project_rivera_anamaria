@@ -18,7 +18,6 @@
       </div>
        <div class="templatemo_link"><ul>
 		 <li><a href="#">Page principal</a></li>
-		 <li><a href="#">À propos de nous</a></li>
 		 <li><a href="#">Des offres</a></li>
          <li><a href="#">Maquillage</a></li>
          <li><a href="#">Crèmes</a></li>
@@ -48,7 +47,6 @@
         <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Entrez votre email...*" required="">
         <br></br>
         <input name="adresse" type="text" id="adresse" placeholder="votre adresse...*" required="">
-        <br></br>
         <button type="submit" class="boton" id="form-submit">ENVOYER</button>
         <p>&nbsp;</p>
       </div>

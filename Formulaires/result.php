@@ -1,96 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-    <title>Confirmation de données</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../CSS/page_index.css" rel="stylesheet">
-
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="../CSS/font.css">
-    <link rel="stylesheet" href="../CSS/template.css">
-    <link rel="stylesheet" href="../CSS/owl.css">
-    <link rel="stylesheet" href="../CSS/box.css">
-    <link rel="stylesheet" href="../CSS/slider.css">
-<!--
-
-TemplateMo 569 Edu Meeting
-
-https://templatemo.com/tm-569-edu-meeting
-
--->
-  </head>
-
-<body>
-
-  <!-- Sub Header -->
-  <div class="sub-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-sm-8">
-          <div class="left-content">
-            <p>Ceci est un site <em>HTML CSS</em> dédié aux femmes!</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <div class="right-icons">
-            <ul>
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-behance"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-      <div class="container">
-          <div class="row">
-              <div class="col-12">
-                  <nav class="main-nav">
-                      <!-- ***** Logo Start ***** -->
-                      <a href="index.html" class="logo">
-                            Magasin RIVERANIS
-                      </a>
-                      <!-- ***** Logo End ***** -->
-                      <!-- ***** Menu Start ***** -->
-                      <ul class="nav">
-                          <li class="scroll-to-section"><a href="#top" class="active">Accueil</a></li>
-                          <li><a href="accueil.html">Accueil</a></li>
-                          <li class="scroll-to-section"><a href="#apply">Des offres</a></li>
-                          <li class="has-sub">
-                              <a href="javascript:void(0)">Enregistrer</a>
-                              <ul class="sub-menu">
-                                  <li><a href="meetings.html">Commencer la session</a></li>
-                                  <li><a href="meeting-details.html">Inscription</a></li>
-                              </ul>
-                          </li>
-                          <li class="scroll-to-section"><a href="#courses">Courses</a></li> 
-                          <li class="scroll-to-section"><a href="#contact">Contactez-nous</a></li> 
-                      </ul>        
-                      <a class='menu-trigger'>
-                          <span>Menu</span>
-                      </a>
-                      <!-- ***** Menu End ***** -->
-                  </nav>
-              </div>
-          </div>
-      </div>
-  </header>
-
 <?php
 require_once("../Formulaires/fonctions.php");
 
@@ -102,6 +9,7 @@ $motdepasse = $_POST['motdepasse'];
 $confirmation = $_POST['cmotdepasse'];
 $email =$_POST['email'];
 $adresse = $_POST['adresse'];
+$token=rand(100,1000);
 $validaok=0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -166,19 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         //Impression de données
         $encodeName = encodeName($saltedName);
-        echo "</br>";
-        echo "Les données saisies sont :";
-        echo "</br>";
-        echo "</br>";
-        echo "</br> Votre Nom est : " . $nom;
-        echo "</br>";
-        echo "</br> Votre Prenom est : " . $prenom;
-        echo "</br>";
-        echo "</br> Votre Utilisateur est : " . $utilisateur;
-        echo "</br>";
-        echo "</br> Votre Mot de Passe est : " . $encodeName;
-        echo "</br>";
-        echo "</br>";
+        
       }
     }
 
@@ -205,4 +101,76 @@ if (!$motLengthIsValid['isValid']){
 }
 
 ?>
-<a href="./formulaire.php">Retour au formulaire principal</a>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Magasin · Riveranis</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<form method="post" action="../Formulaires/page_login.php">
+<link href="../CSS/page_index.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="templatemo_container">
+  <div class="templatemo_space"></div>
+  <div id="templatemo_body">
+    <div id="templatemo_header">
+      <div id="templatemo_site_title">Magasin <span id="templatemo_site_title2">RIVERANIS</span></div>
+      <div id="templatemo_slogan">Un site réalisé par des femmes, pour les femmes !</div>
+      </div>
+       <div class="templatemo_link"><ul>
+		 <li><a href="#">Page principal</a></li>
+		 <li><a href="#">Des offres</a></li>
+         <li><a href="#">Maquillage</a></li>
+         <li><a href="#">Crèmes</a></li>
+         <li><a href="#">Accessoires</a></li>
+         <li><a href="#">Login!</a></li>
+        </ul> 
+    </div>
+    <p>&nbsp;</p>
+    <h1>!!! Félicitations !!!</h1>
+    <div class="templatemo_text_area"><img src="https://img.freepik.com/vector-gratis/silueta-mujer-feliz-pelo-colores_23-2147506214.jpg" alt="templatemo.com" width="192" height="147" />
+      <p>A partir de ce moment, vous faites partie de notre communauté !</p>
+      <br></br>
+      <br></br>
+    </div>
+    <button type="submit" class="boton" id="form-submit">COMMENCER SESSION</button>
+    <div id="templatemo_bottom">
+      <div class="templatemo_mid1">
+        <h2>Vos informations</h2>
+        <?php
+        echo '<table border="0" cellspacing="2" cellpadding="2"> 
+        <tr> 
+            <td> <font face="sans-serif"><strong>NOM</strong></font> </td>
+            <td>'.$nom.'</td>
+            </tr>';
+        echo '<tr>
+            <td> <font face="sans-serif"><strong>PRÉNOM</strong></font> </td>
+            <td>'.$prenom.'</td>
+            </tr>';
+        echo '<tr>
+             <td> <font face="sans-serif"><strong>UTILISATEUR</strong></font> </td>
+             <td>'.$utilisateur.'</td>
+            </tr>';
+        echo '<tr>
+            <td> <font face="sans-serif"><strong>EMAIL</strong></font> </td>
+            <td>'.$email.'</td>
+            </tr>';
+        echo '<tr>
+            <td> <font face="sans-serif"><strong>ADRESSE</strong></font> </td>
+            <td>'.$adresse.'</td>
+            </tr>';
+        echo '<tr>
+            <td> <font face="sans-serif"><strong>TOKEN</strong></font> </td>
+            <td>'.$token.'</td>
+            </tr>';
+        echo '<br>';
+       ?>
+        <br>              
+        <p>&nbsp;</p>
+      </div>
+</body>
+      
+
+      

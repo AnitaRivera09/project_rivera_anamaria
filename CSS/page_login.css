@@ -9,7 +9,7 @@ body {
 }
 a:link,
 a:visited {
-  color: #ffffff;
+  color: #760554;
   text-decoration: none;
 }
 a:active,
@@ -38,6 +38,7 @@ h2 {
   width: 755px;
   height: 820px;
   background: #fff;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/003/745/787/non_2x/beauty-and-makeup-skincare-vector.jpg");
 }
 #templatemo_body {
   margin: auto;
@@ -120,7 +121,7 @@ h2 {
   padding-right: 20px;
   text-align: justify;
   font-weight: bold;
-  background: url("https://images.unsplash.com/photo-1629196914168-3a2652305f9f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D")
+  background: url("https://static.vecteezy.com/system/resources/previews/001/859/239/non_2x/makeup-cosmetics-product-fashion-beauty-mirror-and-lipstick-cartoon-free-vector.jpg")
     repeat;
 }
 .templatemo_text_area a:link,
@@ -144,7 +145,7 @@ a:hover {
   margin-top: 40px;
 }
 .templatemo_mid1 {
-  float: left;
+  float: right;
   width: 450px;
   height: 250px;
   padding-left: 15px;
@@ -164,7 +165,7 @@ a:hover {
   background: url(../Images/templatemo_bullet.jpg) no-repeat center left;
 }
 .templatemo_mid1 a:hover {
-  color: #ee376b;
+  color: #600553;
   text-decoration: underline;
 }
 .templatemo_left_border {
@@ -200,7 +201,6 @@ a:hover {
   width: 225px;
   height: 180px;
   background: url(../Images/templatemo_address.jpg) no-repeat;
-  color: #ffffff;
 }
 
 #templatemo_footer {
@@ -227,9 +227,9 @@ a:hover {
 }
 table {
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-  font-size: 13px;
+  font-size: 12px;
   margin: 45px;
-  width: 450px;
+  width: 480px;
   text-align: left;
   border-collapse: collapse;
 }
@@ -255,61 +255,4 @@ td {
 tr:hover td {
   background: #d0dafd;
   color: #339;
-}
-
-/*--FORMULARIO-------------------*/
-.form {
-  width: 450px;
-  padding: 30px;
-  margin: auto;
-  margin-top: 100px;
-  background: rgba(15, 50, 72, 0.3);
-  border-radius: 5px;
-}
-/*--TITULO-----------------------*/
-.titre {
-  color: #1610c2;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 35px;
-}
-/*--CAJAS-DE-DATOS---------------*/
-.inputs {
-  width: 100%;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 2px;
-  border: none;
-  border-left: 10px solid #d9e4ea;
-  transition: all 0.5s ease;
-}
-.inputs:hover,
-.inputs:focus {
-  border-left: 10px solid #1a4c7e;
-}
-
-/*--BOTON-DE-REGISTRARSE---------*/
-.btn {
-  width: 100%;
-  padding: 15px;
-  border-radius: 2px;
-  border: none;
-  margin: 20px 0;
-  font-size: 15px;
-  background: #225677;
-  color: white;
-  cursor: pointer;
-  transition: all 0.5s ease;
-}
-.btn:hover {
-  background: #133043;
-}
-
-li {
-  color: #020005;
-  font-size: 20px;
-  font-family: Garamond;
-  text-align: center;
-  text-transform: capitalize;
-  text-decoration: #225677;
 }
