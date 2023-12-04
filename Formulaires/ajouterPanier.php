@@ -4,7 +4,7 @@ include '../Formulaires/fonctions.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $produit = getProduitById($id);
-    $quantiteDemande = $_POST['quantite'];
+    $quantiteDemande = $_POST['quantity'];
     addCard($id, $quantiteDemander);
 
 }

@@ -1,80 +1,123 @@
 <?php
-
 include '../Formulaires/fonctions.php';
 
+//connexion a la bd
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpassword = "";
+$dbname = "ecom1_project";
+
+$conn = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
+
+if (!$conn) {
+    die("Echec de la connexion a la base de donne" . mysqli_connect_error());
+}
+//permet de vérifier si le nom d'utilisateur et le mot de passe sont les mêmes que ceux de la base de données
+//isset vérifier si la variable est déclarée et qu'elle n'est pas nulle
+if (isset($_POST['send'])) {
+    $utilisateur = $_POST['utilisateur'];
+    $motdepasse = $_POST['motdepasse'];
+    $utilisateur = mysqli_real_escape_string($conn, $utilisateur);
+    $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
+
+    if (!empty($utilisateur) && !empty($motdepasse)) {
+
+
+        $sql = 'SELECT * FROM user where user_name = "' . $utilisateur . '" and pwd="' . $motdepasse . '"';
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) == 1) {
+            echo "L'utilisateur $utilisateur existe ";
+            header('Location: ../Formulaires/home.php');
+        } else {
+            echo "L'utilisateur $utilisateur n'existe pas! Le nom d'utilisateur ou le mot de passe n'est pas correct! ";
+
+        }
+
+
+    }
+
+}
 ?>
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magasin Riveranis</title>
-  <!-- Enlace a Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f8f8;
-      margin: 0;
-      padding: 0;
-    }
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../CSS/header.css" />
+  <link rel="stylesheet" href="../CSS/style.css" />
 
-    header {
-      background-color: #fff;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 15px 0;
-    }
-
-    .logo {
-      max-width: 150px;
-    }
-
-    .cart-icon {
-      max-width: 30px;
-      margin-left: 10px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      transition: color 0.3s ease-in-out;
-    }
-
-    nav a:hover {
-      color: #ff6f61;
-    }
-  </style>
+  <title>Magazin . Riveranis</title>
 </head>
 <body>
-
-  <header class="container">
-    <div class="row align-items-center">
-      <div class="col-4">
-        <img src="https://img.freepik.com/vector-premium/chica-piel-hermosa-sana_73925-238.jpg?size=626&ext=jpg" class="logo img-fluid">
-        <h4>
-        Livraison Et Échantillons GRATUITS sur toutes les commandes toujours
-      </h4>  
+  <header>
+    <div class="livraison">
+    <div class="beauty">
+      <h1>Magasin * RIVERANIS</h1>
     </div>
-      <nav class="col-8 text-right">
-        <a href="#">Page Principal</a>
-        <a href="#">Produits</a>
-        <a href="#">Offres</a>
-        <a href="#">Contactez-nous</a>
-        <!-- Imagen del carrito de compras -->
-        <img src="https://img.freepik.com/vector-premium/plantilla-diseno-logotipo-carrito-compras-linea_591497-178.jpg" alt="Carrito de compras" class="cart-icon">
+    <img src="https://img.freepik.com/vector-premium/chica-piel-hermosa-sana_73925-238.jpg?size=626&ext=jpg" class="logo img-fluid">
+      <h4>
+      Un site réalisé par des femmes, pour les femmes !
+      </h4>
+    </div>
+    <div>
+      <nav>
+        <a class="a" href="../Formulaires/home.php">Page Principal</a>
+        <a class="a" href="../Formulaires/inscription.php">Inscription</a>
         <a class="a" href="../Formulaires/panier.php">
-          <?php echo countElementPanier(); ?>
-        </a>
+          <?php echo countElementPanier(); ?><img src="https://images.vexels.com/media/users/3/200060/isolated/preview/e39eb7217c7b5157d2c9154564d76598-icono-de-carrito-de-compras-rosa.png" alt="Carrito de compras" class="cart-icon">
+        </a> 
       </nav>
     </div>
-  </header>
+    <main>
+     <section>
+        <h1>Connexion</h1>
+        <form method="post">
+           <div class="container">              
+                <div class="mb-3">
+                  <table>
+                    <tr>
+                        <td>Utilisateur</td>
+                        <td><input type="text" name="utilisateur" class="form-control" id="utilisateur" ></td>
+                    </tr>
+                    <tr>
+                       <td>Mot de Passe</td>
+                       <td><input type="password" name="motdepasse" class="form-control" id="motdepasse" ></td>
+                    </tr>
+                <br>
+          </table>
+          <input type="submit" name="send" class="boton" value="Connexion">
+    </div>
+    </div>
 
-  <!-- Enlace a Bootstrap JS y Popper.js -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            </div>
+            <div class="control">
+                <span class="psw"><a href="../Mot de passe oublie/index.html">oublie mot de passe?</a></span>
+            </div>
+            <div class="check">
+                <label id="1"><input type="checkbox" checked="checked" name="remember">Remember me</label>
+            </div>
+            <div class="container">
+                <div>
+                </div>
+                <span class="psw"><a href="../Cree_compte/cree_compte.html">Cree un compte?</a></span>
+            </div>
+        </form>
+    </div>
 
+    <div id="message">
+        <h3>Password must contain the following:</h3>
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+    </div>
+    </footer>
 </body>
+
 </html>

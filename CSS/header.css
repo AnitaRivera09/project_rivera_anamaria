@@ -27,6 +27,13 @@ h1 {
   margin: 15px;
 }
 
+td {
+  font-family: "Ink Free";
+  font-size: 25px;
+  color: #d16dc9;
+  margin: 15px;
+}
+
 .beauty {
   height: 60px;
   display: flex;

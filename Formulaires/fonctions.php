@@ -18,7 +18,7 @@ function connexionDB()
     return $connexion;
 }
 //////
-function inscription($nom, $prenom, $utilisateur, $motdepasse, $email)
+function inscription($nom, $prenom, $utilisateur, $email, $adresse,$motdepasse,$token)
 {
     $conn = connexionDB();
 
@@ -26,8 +26,10 @@ function inscription($nom, $prenom, $utilisateur, $motdepasse, $email)
     $nom = mysqli_real_escape_string($conn, $nom);
     $prenom = mysqli_real_escape_string($conn, $prenom);
     $utilisateur = mysqli_real_escape_string($conn, $utilisateur);
-    $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
     $email = mysqli_real_escape_string($conn, $email);
+    $adresse=mysqli_real_escape_string($conn, $adresse);
+    $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
+    $token=rand(100,1000);
     //encriptar password
     $motdepassehash = password_hash($motdepasse, PASSWORD_DEFAULT);
 
@@ -45,35 +47,23 @@ function inscription($nom, $prenom, $utilisateur, $motdepasse, $email)
             if (mysqli_num_rows($result) == 1) {
                 echo "L'utilisateur avec $email existe ";
             } else { // ??? informacion que ingresa usuario
-                $sql = "INSERT INTO user(nom,nam,email,pass) values(?,?,?,?)";
-                $stmt = $conn->prepare($sql); //prepara la requete
-                $stmt->bind_param("ssss", $nom, $prenom, $email, $mot_de_passe_hash); // pasa parametros funcion bind_param(types(s=String),tab())
-                $result = $stmt->execute(); //execute recturna un boolean
-                //busca la informacion del usuario 
-                $sql2 = 'SELECT * FROM person where email = "' . $email . '"';
-                $result2 = mysqli_query($conn, $sql2);
-                //obtiene el id
-                $resultId = mysqli_fetch_assoc($result2);
-                $id = $resultId["id"];
-                //rol cliente
-                $client = 2;
-
-
-                $sql3 = "INSERT INTO personrole(id_role,id_person) values(?,?)";
-                $stmt = $conn->prepare($sql3);
-                $stmt->bind_param("is", $client, $id);
-                $result1 = $stmt->execute();
-
-                if ($result) {
-
-                    // hace validacion
-                    echo header('Location: ./index.php');
+                $sql = "INSERT INTO user VALUES (NULL,'$utilisateur','$email','$motdepasse','$nom','$prenom','$adresse','$adresse','$token',3)";
+                if ($conn->query($sql) === TRUE) {
+                    echo "<li></strong>Données enregistrées avec succès.</strong></li>";
                 } else {
-                    echo "Une erreur est survenue";
+                    echo "Erreur lors de l'enregistrement" . $conn->error;
                 }
-            }
-        }
+            
+        
+            ?>
+        </ul>
+        <?php
+        // fermer la conncetion
+        $conn->close();
     }
+}
+    
+}
 }
 
 

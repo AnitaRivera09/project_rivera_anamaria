@@ -6,29 +6,33 @@ $dbuser = "root";
 $dbpassword = "";
 $dbname = "ecom1_project";
 
-if (isset($_POST['envoyer'])) {
-    //  recuperation des donnees de mon formulaire
- $nom = $_POST['nom'];
- $prenom = $_POST['prenom'];
- $utilisateur=$_POST['userid'];
- $motdepasse = $_POST['motdepasse'];
- $cmotdepasse = $_POST['cmotdepasse'];
- $email = $_POST['email'];
- 
+
  // verification des donnees
- if(!empty($nom) && !empty($prenom) && !empty($utilisateur) && 
- !empty($email) && !empty($motdepasse) && 
- !empty($cmotdepasse)){
-     if ($motdepasse === $cmotdepasse) {
-         // 0. connexion a la base de donnee
-        
-         inscription($nom,$prenom,$utilisateur,$motdepasse, $email);
-             
+ if (isset($_POST['envoyer'])) {
+  //  recuperation des donnees de mon formulaire
+$nom = $_POST['nom'];
+$prenom = $_POST['prenom'];
+$utilisateur =$_POST['utilisateur'];
+$email = $_POST['email'];
+$adresse =$_POST['adresse'];
+$motdepasse = $_POST['motdepasse'];
+$cmotdepasse = $_POST['cmotdepasse'];
+// verification des donnees
+if(!empty($nom) && !empty($prenom) && !empty($utilisateur) && 
+!empty($email) && !empty($sdresse)&& !empty($motdepasse) && 
+!empty($cmotdepasse)){
+   if ($motdepasse === $cmotdepasse) {
+       // 0. connexion a la base de donnee
+      
+       inscription($nom,$prenom,$utilisateur,$email,$adresse,$motdepasse,$token);
+           
 
-                    }
+                  }
 
-                }
-            }
+              }
+          }
+
+?>
 
 ?>
 <!DOCTYPE html>
@@ -112,7 +116,7 @@ if (isset($_POST['envoyer'])) {
                     </tr>
                     <tr>
                       <td>Email</td>
-                      <td><input type="email" name="email" class="form-control" id="exampleInputEmail1"></td>
+                      <td><input type="email" name="email" class="form-control" id="email"></td>
                     </tr>  
                     <tr>
                       <td>Adresse</td>
@@ -120,11 +124,11 @@ if (isset($_POST['envoyer'])) {
                     </tr>  
                     <tr>
                        <td>Mot de passe</td>
-                       <td><input type="password" name="password" class="form-control" id="exampleInputPassword1"></td>
+                       <td><input type="password" name="motdepasse" class="form-control" id="motdepasse"></td>
                     </tr>
                     <tr>
                        <td>Confirmer Mot de passe</td>
-                       <td><input type="password" name="c-password" class="form-control" id="exampleInputPassword1"></td>
+                       <td><input type="password" name="cmotdepasse" class="form-control" id="cmotdepasse"></td>
                     </tr>
                 <br>
                </table>
