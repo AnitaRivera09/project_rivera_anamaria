@@ -1,3 +1,42 @@
+<?php
+//connexion a la bd
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpassword = "";
+$dbname = "ecom1_project";
+
+$conn = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
+
+if (!$conn) {
+    die("Echec de la connexion a la base de donne" . mysqli_connect_error());
+}
+//permet de vérifier si le nom d'utilisateur et le mot de passe sont les mêmes que ceux de la base de données
+//isset vérifier si la variable est déclarée et qu'elle n'est pas nulle
+if (isset($_POST['send'])) {
+    $utilisateur = $_POST['userid'];
+    $motdepasse = $_POST['motdepasse'];
+    $utilisateur = mysqli_real_escape_string($conn, $utilisateur);
+    $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
+
+    if (!empty($utilisateur) && !empty($motdepasse)) {
+
+
+        $sql = 'SELECT * FROM user where user_name = "' . $utilisateur . '" and pwd="' . $motdepasse . '"';
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) == 1) {
+            echo "L'utilisateur $utilisateur existe ";
+        } else {
+            echo "L'utilisateur $utilisateur n'existe pas ";
+
+        }
+
+
+    }
+
+}
+?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -5,7 +44,6 @@
 <title>Magasin · Riveranis</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<form method="post" action="../Formulaires/result.php">
 <link href="../CSS/page_login.css" rel="stylesheet"/>
 </head>
 <body>
@@ -36,7 +74,7 @@
         <br></br>
         <a href="#">¿Avez-vous perdu votre mot de passe?</a>
         <br></br>
-        <button type="submit" class="boton" id="form-submit">ENVOYER</button>        
+        <button type="submit" name="send" class="boton" id="form-submit">ENVOYER</button>        
         <p>&nbsp;</p>
       </div>           
     </form>

@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(244, 190, 217);
+  display: flex;
+  flex-direction: column;
+}
+
+.livraison {
+  height: 70px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: rgb(155, 89, 182);
+}
+
+h1 {
+  font-family: "Ink Free";
+  font-size: 50px;
+  color: #d16dc9;
+  margin: 15px;
+}
+
+.beauty {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.H {
+  font-family: Arial;
+  font-size: 20px;
+  color: #d1976d;
+  margin: 0;
+  position: absolute;
+  left: 125px;
+  top: 115px;
+}
+
+.nav {
+  width: 100%;
+  height: 55px;
+  background-size: cover;
+  background-position: center;
+}
+
+nav {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.a {
+  position: relative;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(255, 0, 251);
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.a:after {
+  content: "";
+  position: absolute;
+  background-color: #d1976d;
+  height: 3px;
+  width: 0%;
+  left: 0;
+  bottom: -8px;
+  transition: 0.3s;
+}
+
+.a:hover {
+  color: #d1976d;
+}
+
+.a:hover:after {
+  width: 100%;
+}
+
+.slidershow {
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 3px 3px 15px 0px #d1976d;
+  width: 1470;
+  height: auto;
+  overflow: hidden;
+}
+
+.middle {
+  margin: 20px;
+  position: relative;
+}
+
+.navigation {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.bar {
+  width: 50px;
+  height: 10px;
+  border: 2px solid whitesmoke;
+  border-radius: 20px;
+  box-shadow: 3px 3px 15px 0px #d1976d;
+  margin: 20px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.bar:hover {
+  background-color: #d1976d;
+}
+.templatemo_link {
+  float: left;
+  width: 729px;
+  height: 55px;
+  margin: 0px;
+  padding: 0px;
+  background: url(../Images/templatemo_link_bar.jpg) no-repeat;
+}
+.templatemo_link ul {
+  margin-left: 85px;
+  margin-top: 20px;
+  padding: 0px;
+  list-style: none;
+  text-align: center;
+}
+
+.templatemo_link li {
+  display: inline;
+}
+.templatemo_link li a {
+  float: left;
+  text-decoration: none;
+  padding-top: 0px;
+  color: #753d68;
+  width: 80px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+.templatemo_link li a:hover,
+.templatemo_link li .current {
+  color: #d201a5;
+}
+
+.logo {
+  max-width: 150px;
+}
+
+.cart-icon {
+  max-width: 30px;
+  margin-left: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  color: #ff6f61;
+}
