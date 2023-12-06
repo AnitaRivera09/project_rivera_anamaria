@@ -33,6 +33,32 @@ td {
   color: #d16dc9;
   margin: 15px;
 }
+.name {
+  font-family: "Ink Free";
+  font-size: 25px;
+  font-style: italic;
+  color: #151315;
+  margin: 5px;
+}
+.price {
+  font-family: "Ink Free";
+  font-size: 15px;
+  font-style: bold;
+  color: #151315;
+  margin: 10px;
+}
+.description {
+  font-family: "Ink Free";
+  font-size: 20px;
+  font-style: bold;
+  color: #151315;
+  margin: 10px;
+}
+
+.image_produit {
+  width: "400";
+  height: "400";
+}
 
 .beauty {
   height: 60px;
@@ -99,7 +125,7 @@ nav {
   border-radius: 10px;
   box-shadow: 3px 3px 15px 0px #d1976d;
   width: 1470;
-  height: auto;
+  height: 1000px;
   overflow: hidden;
 }
 
@@ -182,4 +208,9 @@ nav a {
 
 nav a:hover {
   color: #ff6f61;
+}
+
+.boton-modification {
+  max-width: 30px;
+  margin-left: 10px;
 }

@@ -75,6 +75,9 @@ if (isset($_POST['send'])) {
       </nav>
     </div>
     <main>
+    <table>
+    <tr>
+     <td>
      <section>
         <h1>Connexion</h1>
         <form method="post">
@@ -89,11 +92,11 @@ if (isset($_POST['send'])) {
                        <td>Mot de Passe</td>
                        <td><input type="password" name="motdepasse" class="form-control" id="motdepasse" ></td>
                     </tr>
-                <br>
-          </table>
-          <input type="submit" name="send" class="boton" value="Connexion">
-    </div>
-    </div>
+                    <br>
+                  </table>
+             <input type="submit" name="send" class="boton" value="Connexion">
+             </div>
+           </div>
 
             </div>
             <div class="control">
@@ -105,7 +108,7 @@ if (isset($_POST['send'])) {
             <div class="container">
                 <div>
                 </div>
-                <span class="psw"><a href="../Cree_compte/cree_compte.html">Cree un compte?</a></span>
+                <span class="psw"><a href="../Formulaires/inscription.php">Cree un compte?</a></span>
             </div>
         </form>
     </div>
@@ -117,6 +120,14 @@ if (isset($_POST['send'])) {
         <p id="number" class="invalid">A <b>number</b></p>
         <p id="length" class="invalid">Minimum <b>8 characters</b></p>
     </div>
+</td>
+</tr>
+<tr>
+  <td>
+  <img src="https://media.istockphoto.com/id/1359786865/es/foto/concepto-de-seguridad-de-autenticaci%C3%B3n-de-contrase%C3%B1a-y-bloqueo-de-mujer-3d.jpg?s=1024x1024&w=is&k=20&c=hCDKEP_59MCighyk6wKtWghPA9LW_T9pT8BFM8EJKbM=">
+  </td>
+</tr>
+    </table>
     </footer>
 </body>
 

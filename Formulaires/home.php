@@ -25,13 +25,12 @@ include "../Formulaires/header.php";
         <p class="name">
           <?php echo $produit['name']; ?>
         </p>
-
-        <p class="price"><b>$
+        <p class="price">$
             <?php echo $produit['price']; ?>
           </b></p>
 
       </div>
-      <button class="add">Ajouter au panier</button>
+      <button class="boton">Ajouter au panier</button>
     </div>
   <?php } ?>
 </main>

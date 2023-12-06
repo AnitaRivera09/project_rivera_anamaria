@@ -47,31 +47,47 @@ if (isset($_GET['id'])) {
     </div>
 
 <main>
-
-    <section>
-        <div class="card">
-            <div class="image">
+    <table>
+     <tr>
+      <td>   
+        <section>        
+            <div class="image_produit">
                 <a href=<?php echo $produit['id']; ?>>
                     <?php $imag = getimage($produit['id']) ?>
                     <img src=<?php echo $imag; ?>></a>
-            </div>
-
-
+            </div>          
+    </section>
+    </td>
+    <td>
+   <div class="col-md-6">
+    <section>
+      <fieldset>
             <p class="name">
                 <?php echo $produit['name']; ?>
+               </br>
+               </br>
+               </br>
             </p>
-            <?php echo $produit['description']; ?>
-            <form method="post" action="../Formulaires/ajouterPanier.php">
-
-                <p class="price"><b>$
-                        <?php echo $produit['price']; ?>
+            <p class="description">
+              <?php echo $produit['description']; ?>
+              <form method="post" action="../Formulaires/ajouterPanier.php">
+              </br>
+               </br>
+               </br>
+            </p>
+               <p class="price"><b>$
+                    <?php echo $produit['price']; ?>
                     </b></p>
                 <input type="number" name="quantite" min="0" max=<?php echo $produit['quantity']; ?>>
 
-                <input type="submit" value="Ajouter au panier" class="btn btn-warning" name="envoyer">
+                <input type="submit" value="Ajouter au panier" class="boton" name="envoyer">
                 <input type="hidden" name="id" value="<?php echo $produit['id']; ?>">
-                <a href="acheter.php"><button class="add">acheter</button></a>
+                <a href="acheter.php"><button class="boton">acheter</button></a>
+       </fieldset>         
     </section>
+</td>
+</tr>
+</table>
     </form>
 </main>
 </body>

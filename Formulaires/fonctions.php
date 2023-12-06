@@ -130,26 +130,26 @@ function updateProduit($idproduit, $nameproduct, $quantity, $price, $description
 
 }
 
-function getProduitById($idproduit)
+function getProduitById($id)
 {
 
     $conn = connexionDB();
 
     $sql = 'SELECT * from product where id = ?';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $idproduit);
+    $stmt->bind_param('i', $id);
     $stmt->execute();
     $resultat = $stmt->get_result();
     $produit = $resultat->fetch_assoc();
     return $produit;
 }
 
-function effacerProduit($idproduit)
+function effacerProduit($id)
 {
     $conn = connexionDB();
     $sql = 'DELETE FROM product WHERE id=?';
     $stm = $conn->prepare($sql);
-    $stm->bind_param('i', $idproduit);
+    $stm->bind_param('i', $id);
     $resultado = $stm->execute();
     $stm->close();
     $conn->close();

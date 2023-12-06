@@ -74,13 +74,13 @@ include '../Formulaires/fonctions.php';
         <input type="radio" name="r" id="r2" />
         <input type="radio" name="r" id="r3" />
         <div class="slide s1">
-          <img src="https://media.vogue.mx/photos/6346ff68eb77bd5463fdf2aa/1:1/w_2000,h_2000,c_limit/belleza-aesthetic-tendencias-primavera-verano-2023.jpg" alt="" />
+          <img src="https://media.vogue.mx/photos/6346ff68eb77bd5463fdf2aa/1:1/w_2000,h_2000,c_limit/belleza-aesthetic-tendencias-primavera-verano-2023.jpg" width="170" height="147" alt="" />
         </div>
         <div class="slide">
-          <img src="https://www.seetok.mx/__export/1693846429748/sites/seetok/img/2023/09/04/ht.jpg_610058475.jpg" alt="" />
+          <img src="https://www.seetok.mx/__export/1693846429748/sites/seetok/img/2023/09/04/ht.jpg_610058475.jpg" width="170" height="147" alt="" />
         </div>
         <div class="slide">
-          <img src="https://img.freepik.com/fotos-premium/haz-tus-ojos-lienzo-arte-maquillajes-ojos-radiantes-vividos-brillantes_936862-121.jpg?w=2000" alt="" />
+          <img src="https://img.freepik.com/fotos-premium/haz-tus-ojos-lienzo-arte-maquillajes-ojos-radiantes-vividos-brillantes_936862-121.jpg?w=2000" width="170" height="147" alt="" />
         </div>
       </div>
       <div class="navigation">

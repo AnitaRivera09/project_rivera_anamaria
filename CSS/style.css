@@ -94,6 +94,10 @@ main .card button {
   font-weight: bold;
   position: relative;
 }
+.image_produit {
+  width: "200";
+  height: "200";
+}
 
 main .card button:before {
   content: "";
