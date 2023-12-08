@@ -35,9 +35,8 @@ $users=getUsers();
                     <td><?php echo $user['name'];?></td>
                     <td class="row bg-transparent">
                     <div class="col-4">
-                            <a href="modifierUsers.php?id=<?php echo $user['id_user'];?>"><img src="https://cdn-icons-png.flaticon.com/512/269/269074.png" alt="Modifier" class="boton-modification">
-                            </a>    
-                    </div>
+                    <div class="col-4">
+                    <a href="modifierUsers.php?id=<?php echo $user['id'];?>" class="btn btn-block btn-success"><i class="bi bi-pencil-square"></i></a> 
                     <div class="col-2"></div>
                         <div class="col-4 ">
                             

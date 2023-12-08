@@ -1,5 +1,5 @@
 <?php
-include "../Formulaires/fonctions.php";
+include "../Functions/fonctions.php";
 
 if (isset($_GET['id'])) {
     $idproduit = $_GET['id'];

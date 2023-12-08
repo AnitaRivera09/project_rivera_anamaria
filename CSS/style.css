@@ -112,12 +112,15 @@ main .card button:before {
 }
 .form-control {
   width: 100%;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
   border-radius: 2px;
   border: none;
   border-left: 10px solid #d9e4ea;
   transition: all 0.5s ease;
+  font-family: "Ink Free";
+  font-size: 25px;
+  color: #2e518b;
 }
 .boton {
   border: 1px solid #2e518b; /*anchura, estilo y color borde*/

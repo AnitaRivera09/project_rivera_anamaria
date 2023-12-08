@@ -17,54 +17,48 @@ function connexionDB()
     }
     return $connexion;
 }
-//////
-function inscription($nom, $prenom, $utilisateur, $email, $adresse,$motdepasse,$token)
+
+function inscription($nom, $prenom, $utilisateur, $email, $adresse, $motdepasse, $token)
 {
+
     $conn = connexionDB();
 
-    // 1. eviter les attaques par injection sql
+    // Evitar les attaques par injection sql
     $nom = mysqli_real_escape_string($conn, $nom);
     $prenom = mysqli_real_escape_string($conn, $prenom);
     $utilisateur = mysqli_real_escape_string($conn, $utilisateur);
     $email = mysqli_real_escape_string($conn, $email);
-    $adresse=mysqli_real_escape_string($conn, $adresse);
+    $adresse = mysqli_real_escape_string($conn, $adresse);
     $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
-    $token=rand(100,1000);
-    //encriptar password
+    $token=rand(100,999);
+
+    // Encriptar password
     $motdepassehash = password_hash($motdepasse, PASSWORD_DEFAULT);
 
+    // Verificación email déjà existe en BD
+    if (!empty($email)) {
+        $sql = 'SELECT * FROM user where email = "' . $email . '"';
+        $result = mysqli_query($conn, $sql);
 
+        if (mysqli_num_rows($result) == 1) {
+            echo "L'utilisateur avec $email existe ";
+        } else {
+            $sql = "INSERT INTO user VALUES (NULL,'$utilisateur','$email','$motdepasse','$nom','$prenom','$adresse','$adresse','$token',3)";
 
-
-    //verification email deja  existe en BD
-    if (isset($_POST['envoyer'])) {
-        $email = $_POST['email'];
-        $email = mysqli_real_escape_string($conn, $email);
-        if (!empty($email)) {
-
-            $sql = 'SELECT * FROM user where email = "' . $email . '"';
-            $result = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($result) == 1) {
-                echo "L'utilisateur avec $email existe ";
-            } else { // ??? informacion que ingresa usuario
-                $sql = "INSERT INTO user VALUES (NULL,'$utilisateur','$email','$motdepasse','$nom','$prenom','$adresse','$adresse','$token',3)";
-                if ($conn->query($sql) === TRUE) {
-                    echo "<li></strong>Données enregistrées avec succès.</strong></li>";
-                } else {
-                    echo "Erreur lors de l'enregistrement" . $conn->error;
-                }
-            
-        
-            ?>
-        </ul>
-        <?php
-        // fermer la conncetion
-        $conn->close();
+            if ($conn->query($sql) === TRUE) {
+                echo "<li></strong>Félicitations! Vos données ont été enregistrées avec succès!</strong></li>";
+                header('Location: ../Formulaires/connexion.php');
+            } else {
+                echo "Erreur lors de l'enregistrement: " . mysqli_error($conn);
+            }
+        }
     }
+
+    // Fermer la connexion
+    $conn->close();
 }
-    
-}
-}
+
+
 
 
 function getProduit()
@@ -143,6 +137,24 @@ function getProduitById($id)
     $produit = $resultat->fetch_assoc();
     return $produit;
 }
+
+function getAdresseById($id)
+{
+
+    $conn = connexionDB();
+
+    $sql = 'SELECT * from address where id = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $resultat = $stmt->get_result();
+    $adresse = $resultat->fetch_assoc();
+    return $adresse;
+}
+
+
+
+
 
 function effacerProduit($id)
 {

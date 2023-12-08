@@ -1,5 +1,5 @@
 <?php
-require_once("../Formulaires/fonctions.php");
+include "../Functions/fonctions.php";
 
 //Attribuer des valeurs aux variables
 $nom = $_POST['nom'];

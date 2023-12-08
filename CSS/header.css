@@ -122,10 +122,10 @@ nav {
 
 .slidershow {
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 3px 3px 15px 0px #d1976d;
-  width: 1470;
-  height: 1000px;
+  width: 1000;
+  height: auto;
   overflow: hidden;
 }
 

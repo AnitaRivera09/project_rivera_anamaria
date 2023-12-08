@@ -1,5 +1,11 @@
 <?php
-include "../Formulaires/fonctions.php";
+include "../Functions/fonctions.php";
+
+if (isset($_GET['id'])) {
+  $idAdresse = $_GET['id'];
+  $adresse = getAdresseById($idAdresse);
+
+}
 //conexion a la bd
 $dbhost ="localhost";
 $dbuser = "root";
@@ -17,22 +23,28 @@ $email = $_POST['email'];
 $adresse =$_POST['adresse'];
 $motdepasse = $_POST['motdepasse'];
 $cmotdepasse = $_POST['cmotdepasse'];
+$token=0;
 // verification des donnees
-if(!empty($nom) && !empty($prenom) && !empty($utilisateur) && 
-!empty($email) && !empty($sdresse)&& !empty($motdepasse) && 
-!empty($cmotdepasse)){
-   if ($motdepasse === $cmotdepasse) {
+if ($motdepasse === $cmotdepasse) {
+  
        // 0. connexion a la base de donnee
-      
+      // validation des champs
+
+      // user n;est pas dans la db, username lobgueur >2 , pwd >5 
+      // si erreur afficher les messages d;erreur
+
+      // si pas d;erreur 
+      //envoie a la DB
        inscription($nom,$prenom,$utilisateur,$email,$adresse,$motdepasse,$token);
            
 
                   }
+                  else{
+                    echo("Le Mot de Passe et la confirmation ne sont pas les mêmes, merci de valider!"); 
+                  }
 
               }
-          }
-
-?>
+          
 
 ?>
 <!DOCTYPE html>
@@ -96,51 +108,68 @@ if(!empty($nom) && !empty($prenom) && !empty($utilisateur) &&
     </div>
 <body>
 <main>
-     <section>
-        <h1>Inscription</h1>
-        <form method="post">
-           <div class="container">              
-                <div class="mb-3">
-                  <table>
-                    <tr>
-                        <td>Nom</td>
-                        <td><input type="text" name="nom" class="form-control" id="nom" ></td>
+  <table>
+    <tr>
+      <td rowspan="8"><img src="https://img.freepik.com/vector-gratis/fondo-plano-dia-internacional-mujer_23-2149287589.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1697932800&semt=ais" width="400" height="400">
+      </td>
+      <td colspan="3">
+          <h1>Inscription</h1>
+        </td> 
+       </tr>
+     <tr>
+      <td>
+      <form method="post" action="">
+      <fieldset> 
+            <table>            
+             <tr>
+                <td>Nom</td>
+                <td><input type="text" name="nom" class="form-control" id="nom" required ></td>
                     </tr>
                     <tr>
                        <td>Prenom</td>
-                       <td><input type="text" name="prenom" class="form-control" id="prenom" ></td>
+                       <td><input type="text" name="prenom" class="form-control" id="prenom" required></td>
                     </tr>
                     <tr>
                       <td>Utilisateur</td>
-                      <td><input type="text" name="utilisateur" class="form-control" id="utilisateur" ></td>
+                      <td><input type="text" name="utilisateur" class="form-control" id="utilisateur" required ></td>
                     </tr>
                     <tr>
                       <td>Email</td>
-                      <td><input type="email" name="email" class="form-control" id="email"></td>
+                      <td><input type="email" name="email" class="form-control" id="email" required></td>
                     </tr>  
                     <tr>
                       <td>Adresse</td>
-                      <td><input type="text" name="adresse" class="form-control" id="adresse" ></td>
+                      <td><input type="number" name="adresse" class="form-control" min="1" max="10"> </td>
                     </tr>  
                     <tr>
                        <td>Mot de passe</td>
-                       <td><input type="password" name="motdepasse" class="form-control" id="motdepasse"></td>
+                       <td><input type="password" name="motdepasse" class="form-control" id="motdepasse" required></td>
                     </tr>
                     <tr>
                        <td>Confirmer Mot de passe</td>
                        <td><input type="password" name="cmotdepasse" class="form-control" id="cmotdepasse"></td>
                     </tr>
+                    <tr>
+                      <td colspan="2"><input type="submit" value="Inscription" class="boton" name="envoyer" required></td>
+                    </tr>
+            <tr>
+              <td>
+              <td><fieldset>
+            <h3>Password must contain the following:</h3>
+             <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+             <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+             <p id="number" class="invalid">A <b>number</b></p>
+             <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            </td></fieldset>
+              </td>
+            </tr> 
                 <br>
                </table>
-    </div>
-    </div>
-                <div class="d-grid gap-2">
-                    <button type="submit" name="envoyer" class="boton">Inscription</button>
-                </div>
-           
-           </div>
+            </td>
+          </tr>       
         </form>     
     </section>
+  </table>
 </main>
 </body>
 </html>
