@@ -1,6 +1,11 @@
 <?php
 include "../Functions/fonctions.php";
 
+if (session_status() == PHP_SESSION_NONE) {
+  // Solo inicia la sesión si no está activa
+  session_start();
+}
+
 if (isset($_GET['id'])) {
   $idAdresse = $_GET['id'];
   $adresse = getAdresseById($idAdresse);
@@ -27,14 +32,6 @@ $token=0;
 // verification des donnees
 if ($motdepasse === $cmotdepasse) {
   
-       // 0. connexion a la base de donnee
-      // validation des champs
-
-      // user n;est pas dans la db, username lobgueur >2 , pwd >5 
-      // si erreur afficher les messages d;erreur
-
-      // si pas d;erreur 
-      //envoie a la DB
        inscription($nom,$prenom,$utilisateur,$email,$adresse,$motdepasse,$token);
            
 

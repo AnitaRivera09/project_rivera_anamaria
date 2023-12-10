@@ -30,7 +30,7 @@ if(!empty($utilisateur)&& !empty($motdepasse)){
   
      
     
-    $sql= 'SELECT role_id * FROM user where utilisateur = ? ';
+    $sql= 'SELECT role_id FROM user where utilisateur = ? ';
     
     
     $result= $conn->prepare($sql);

@@ -1,41 +1,62 @@
 <?php
-include "../Functions/fonctions.php";
+include('../Functions/fonctions.php');
 
-//connexion a la bd
+if (session_status() == PHP_SESSION_NONE) {
+  // Solo inicia la sesión si no está activa
+  session_start();
+}
+
+// Conección a la BD
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpassword = "";
 $dbname = "ecom1_project";
 
 $conn = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
-
 if (!$conn) {
     die("Echec de la connexion a la base de donne" . mysqli_connect_error());
 }
-//permet de vérifier si le nom d'utilisateur et le mot de passe sont les mêmes que ceux de la base de données
-//isset vérifier si la variable est déclarée et qu'elle n'est pas nulle
+
+// Verifica si se ha enviado el formulario
 if (isset($_POST['send'])) {
     $utilisateur = $_POST['utilisateur'];
     $motdepasse = $_POST['motdepasse'];
+    
     $utilisateur = mysqli_real_escape_string($conn, $utilisateur);
-    $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
 
     if (!empty($utilisateur) && !empty($motdepasse)) {
+        // Corrige la consulta SQL
+        $sql = 'SELECT * FROM user WHERE user_name = ?';
+        
+        $result = $conn->prepare($sql);
 
-
-        $sql = 'SELECT * FROM user where user_name = "' . $utilisateur . '" and pwd="' . $motdepasse . '"';
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) == 1) {
-            echo "L'utilisateur $utilisateur existe ";
-            header('Location: ../Formulaires/home.php');
-        } else {
-            echo "L'utilisateur $utilisateur n'existe pas! Le nom d'utilisateur ou le mot de passe n'est pas correct! ";
-
+        // Verifica si la preparación de la consulta fue exitosa
+        if (!$result) {
+            die("Error en la preparación de la consulta: " . $conn->error);
         }
 
+        $result->bind_param("s", $utilisateur);
+        $result->execute();
+        
+        // Obtiene el resultado de la consulta
+        $result = $result->get_result();
 
+        if ($result->num_rows >= 1) {
+            $utilisateur = $result->fetch_assoc();
+            
+            // Verifica la contraseña utilizando password_verify
+            if (password_verify($motdepasse, $utilisateur['pwd'])) {
+                unset($utilisateur['pwd']); // Elimina la contraseña antes de almacenar en sesión
+                $_SESSION["utilisateur"] = $utilisateur;
+                header('Location: ../Formulaires/home.php');
+                exit;
+            } else {
+                echo "Mot de passe incorrect, merci de valider";
+            }
+        } else {
+            echo "El usuario con nombre $utilisateur no existe";
+        }
     }
-
 }
 ?>
 <!DOCTYPE html>
@@ -97,7 +118,7 @@ if (isset($_POST['send'])) {
                <td>Mot de Passe</td>
                <td><input type="password" name="motdepasse" class="form-control" id="motdepasse" ></td>
              </tr>
-               <td><input type="submit" name="send" class="boton" value="Connexion"></td>                            
+               <td><input type="submit" name="send" class="boton" value="Connexion"></td>                           
              </tr><br>
              </table>
              <span class="psw"><a href="../Mot de passe oublie/index.html">Oublie mot de passe?</a></span></br>

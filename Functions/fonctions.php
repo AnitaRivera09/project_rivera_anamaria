@@ -30,10 +30,10 @@ function inscription($nom, $prenom, $utilisateur, $email, $adresse, $motdepasse,
     $email = mysqli_real_escape_string($conn, $email);
     $adresse = mysqli_real_escape_string($conn, $adresse);
     $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
-    $token=rand(100,999);
+    $motdepasseencript = password_hash($motdepasse, PASSWORD_BCRYPT);
+    $token = hash('sha256', random_bytes(32));
 
-    // Encriptar password
-    $motdepassehash = password_hash($motdepasse, PASSWORD_DEFAULT);
+    
 
     // Verificación email déjà existe en BD
     if (!empty($email)) {
@@ -43,7 +43,7 @@ function inscription($nom, $prenom, $utilisateur, $email, $adresse, $motdepasse,
         if (mysqli_num_rows($result) == 1) {
             echo "L'utilisateur avec $email existe ";
         } else {
-            $sql = "INSERT INTO user VALUES (NULL,'$utilisateur','$email','$motdepasse','$nom','$prenom','$adresse','$adresse','$token',3)";
+            $sql = "INSERT INTO user VALUES (NULL,'$utilisateur','$email','$motdepasseencript','$nom','$prenom','$adresse','$adresse','$token',3)";
 
             if ($conn->query($sql) === TRUE) {
                 echo "<li></strong>Félicitations! Vos données ont été enregistrées avec succès!</strong></li>";
@@ -211,21 +211,6 @@ function ajouterProduit($nameproduct, $description, $price, $quantity, $urlimage
 
 }
 
-//function registrerImage($id_produit, $chemin)
-//{
-  //  $conn = connexionDB();
-    //$sql = 'INSERT INTO image(id_produit, chemin) VALUES (?,?)';
-    //$stmt = $conn->prepare($sql);
-    //$stmt->bind_param("is", $id_produit, $chemin);
-    //$stmt->execute();
-    //$resultat = $stmt->get_result();
-    //if ($resultat) {
-      //  header("Location:./gestionProduit.php");
-    //} else {
-      //  echo "une erreur c'est produit";
-    //}
-
-//}
 
 function getUsers()
 {
@@ -264,6 +249,19 @@ function getUserById($id)
     $user = $resultat->fetch_assoc();
     return $user;
 
+}
+
+function getUserByUsername(string $user_name)
+{
+    global $conn;
+
+    $query = "SELECT * FROM user WHERE user.user_name = '" . $user_name . "';";
+
+    $result = mysqli_query($conn, $query);
+
+    // avec fetch row : tableau indexé
+    $user_name = mysqli_fetch_assoc($result);
+    return $user_name;
 }
 
 function updateUser($username,$email, $motdepasse, $prenom, $nom, $rol)
