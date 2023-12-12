@@ -63,9 +63,9 @@ if (isset($_SESSION['utilisateur'])) {
            if ($utilisateur['role_id'] === 1) {
             ?>
 
-            <a class="a" href="../Formulaires/gestionProduits.php">Gestion Produit</a>
-            <a class="a" href="..Formulaires/ajouterProduit.php">Ajouter Produit</a>
-            <a class="a" href="../Formulaires/gestionUsers.php">Gestion Utilisateur</a>
+            <a class="a" href="gestionProduits.php">Gestion Produit</a>
+            <a class="a" href="ajouterProduit.php">Ajouter Produit</a>
+            <a class="a" href="gestionUsers.php">Gestion Utilisateur</a>
 
 
             <?php

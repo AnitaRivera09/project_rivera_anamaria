@@ -68,7 +68,7 @@ if (isset($_POST['ajouterPanier'])) {
             </div>
             <div class="mb-3">
                 <label for="quantiteD" class="form-label">Quantite Demander</label>
-                <input type="number" name="quantiteD" class="form-control" max="<?php echo $produit['quantiteyD']; ?>">
+                <input type="number" name="quantiteD" class="form-control" max="<?php echo $produit['quantiteD']; ?>">
             </div>
             <label for="descreption" class="form-label">Description</label>
             <div class="form-floating">
@@ -76,10 +76,9 @@ if (isset($_POST['ajouterPanier'])) {
                     id="floatingTextarea2" style="height: 100px">
                    <?php echo $produit['description']; ?>
                     </textarea>
-                <label for="floatingTextarea2">Description</label>
             </div><br>
             <div class="d-grid gap-2">
-                <button class="btn btn-success" name='ajouterPanier' type="submit">Ajouter Panier</button>
+                <button class="boton" name='ajouterPanier' type="submit">Ajouter Panier</button>
             </div>
         </form>
     </section>

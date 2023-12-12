@@ -4,6 +4,8 @@ include "../Functions/fonctions.php";
 
 
 $tab = getAllPanier();
+ var_dump($tab);
+ var_dump($_SESSION['panier']);
 ?>
 
 <!DOCTYPE html>

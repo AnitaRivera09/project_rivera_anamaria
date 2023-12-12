@@ -95,27 +95,27 @@ function getimage($id)
 
 
 
-function updateProduit($idproduit, $nameproduct, $quantity, $price, $description, $urlimage)
+function updateProduit($nomProduit,$description,$prix,$quantity,$idproduit,$image_destination)
 {
     $conn = connexionDB();
 
 
     $sql = 'UPDATE product set name=?, description=?, price =?, quantity=? where id = ? ';
     $stm = $conn->prepare($sql);
-    $stm->bind_param("ssdii", $nameproduct, $description, $price, $quantity, $idproduit);
+    $stm->bind_param("ssdii", $nomProduit, $description, $prix, $quantity, $idproduit);
     $resultado = $stm->execute();
     $stm->close();
     $conn->close();
-    header('Location: ../Formulaires/gestionProduit.php');
+    header('Location: ../Formulaires/gestionProduits.php');
 
 
     if ($resultado == "1") {
-        if ($urlimage != "") {
+        if ($image_destination != "") {
 
-            updateImage($urlimage, $idproduit);
+            updateImage($image_destination, $idproduit);
 
         }
-        header('Location: ../Formulaires/gestionProduit.php');
+        header('Location: ../Formulaires/gestionProduits.php');
 
     } else {
         echo 'Erreur';
@@ -123,6 +123,25 @@ function updateProduit($idproduit, $nameproduct, $quantity, $price, $description
 
 
 }
+
+function updateImage($chemin, $idproduit)
+{
+    $conn = connexionDB();
+    $sql = 'UPDATE product SET img_url=? where  id=?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $chemin, $idproduit);
+    $stmt->execute();
+    $resultat = $stmt->get_result();
+    if ($resultat) {
+        var_dump($resultat);
+        header("Location:../Formulaire/gestionProduits.php");
+    } else {
+        echo "une erreur c'est produit";
+    }
+
+}
+
+
 
 function getProduitById($id)
 {
@@ -320,7 +339,7 @@ function supprimerProduit($id)
     $conn->close();
 
     if ($resultat) {
-        header('Location: ../Formulaires/gestionProduit.php');
+        header('Location: ../Formulaires/gestionProduits.php');
     } else {
         echo 'Erreur';
     }
@@ -337,10 +356,13 @@ function countElementPanier()
     return $taillePanier;
 
 }
+
 function getAllPanier()
 {
     return $_SESSION['panier'];
 }
+
+
 function viderPanier($id)
 {
     unset($_SESSION['panier'][$id]);

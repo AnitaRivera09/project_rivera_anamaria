@@ -50,7 +50,7 @@ $produits = getProduit();
                             </div>
                             <div class="col-2"></div>
                             <div class="col-4 ">
-                                <!--crea el hipervinculo para dirigir a la otra pagina al momento de dsar clic sobre el boton eliminar-, va hasta el otro archivo---->
+                                
                                 <a href="efacerProduit.php?id=<?php echo $produit['id']; ?>"
                                     class="btn btn-block btn-danger"><i class="bi bi-trash"></i>
                                 </a>
@@ -58,7 +58,7 @@ $produits = getProduit();
                             <div class="col-2"></div>
                             <div class="col-4 ">
                                 <a href="viewPanier.php?id=<?php echo $produit['id']; ?>"><button
-                                        class="btn btn-success" name='ajouterPanier' type="submit">Ajouter Panier</button>
+                                        class="boton" name='ajouterPanier' type="submit">Ajouter Panier</button>
                                 </a>
                             </div>
                         </td>

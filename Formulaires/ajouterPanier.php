@@ -8,12 +8,7 @@ if (isset($_GET['id'])) {
     addCard($id, $quantiteDemander);
 
 }
-// if (isset($_POST['id'])) {
-//     $id = $_POST['id'];
-//     $quantiteDemander = $_POST['quantitedemander'];
-//     addCard($id, $quantiteDemander);
 
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,3 +47,41 @@ if (isset($_GET['id'])) {
         </a> 
       </nav>
     </div>
+    <body>
+    <main>
+        <?php foreach ($tab as $id => $qte) {
+            $produit = getProduitById($id); ?>
+
+            <div class="card">
+                <div class="images">
+                    <a href=<?php echo $produit['id']; ?>>
+                        <?php $imag = getimage($produit['id']) ?>
+                        <img src=<?php echo $imag; ?>></a>
+                </div>
+                <div class="caption">
+
+                    <p class="product_name">
+                        <?php echo $produit['name']; ?>
+                    </p>
+                    <p class="price"><b>
+                            <?php echo $produit['price']; ?>
+                        </b></p>
+                    <p class="description"><b>
+                            <?php echo $produit['description']; ?>
+                        </b></p>
+                    <p class="quantity"><b> <input type="number" value="<?php echo $qte; ?>" min="0"
+                                max="<?php echo $produit['quantity']; ?>">
+
+                        </b></p>
+                    <a href="supprimerProduit.php?id=<?php echo $produit['id']; ?>"><button
+                            class="remove">Supprimer</button></a>
+
+                    <a href="viewPanier.php?id=<?php echo $produit['id']; ?>"> <button
+                            class="update">View</button></a>
+                    <div id="paypal-payment-button"></div>
+
+                </div>
+            </div>
+        <?php } ?>
+    </main>
+</body>
