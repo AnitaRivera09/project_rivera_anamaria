@@ -1,4 +1,5 @@
-<?php  include  "../Formulaires/header.php"; 
+<?php  
+include  "../Formulaires/header.php"; 
 
 $users=getUsers();
 
@@ -36,11 +37,11 @@ $users=getUsers();
                     <td class="row bg-transparent">
                     <div class="col-4">
                     <div class="col-4">
-                    <a href="modifierUsers.php?id=<?php echo $user['id'];?>" class="btn btn-block btn-success"><i class="bi bi-pencil-square"></i></a> 
+                    <a href="modifierUsers.php?id=<?php echo $user['id_user'];?>" class="btn btn-block btn-success"><i class="bi bi-pencil-square"></i></a> 
                     <div class="col-2"></div>
                         <div class="col-4 ">
                             
-                            <a href="effacerUsers.php?id=<?php echo $user['id_user'];?>" class="btn btn-block btn-danger"><i class="bi bi-trash"></i>
+                            <a href="effacerUser.php?id=<?php echo $user['id_user'];?>" class="btn btn-block btn-danger"><i class="bi bi-trash"></i>
                             </a>
                         </div>
                     </td>

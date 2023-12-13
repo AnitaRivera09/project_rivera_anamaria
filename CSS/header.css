@@ -26,6 +26,12 @@ h1 {
   color: #d16dc9;
   margin: 15px;
 }
+.form-label {
+  font-family: "Ink Free";
+  font-size: 25px;
+  color: #d16dc9;
+  margin: 15px;
+}
 
 td {
   font-family: "Ink Free";

@@ -26,7 +26,7 @@ if(isset($_GET['id'])){
              $image_name = $_FILES["image"]["name"];
              $image_tmp = $_FILES["image"]["tmp_name"];
             
-             $image_destination = "images/" . basename($image_name); // Chemin de destination du fichier sur le serveur
+             $image_destination = "Images/" . basename($image_name); // Chemin de destination du fichier sur le serveur
              echo $image_destination;
              // Vérifier que le fichier est une image (facultatif mais recommandé)
              $image_type = strtolower(pathinfo($image_destination, PATHINFO_EXTENSION));

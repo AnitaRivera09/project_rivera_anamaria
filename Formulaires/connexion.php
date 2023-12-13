@@ -54,7 +54,7 @@ if (isset($_POST['send'])) {
                 echo "Mot de passe incorrect, merci de valider";
             }
         } else {
-            echo "El usuario con nombre $utilisateur no existe";
+            echo "L'utilisateur $utilisateur n'existe pas!";
         }
     }
 }

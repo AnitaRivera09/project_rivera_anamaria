@@ -91,7 +91,7 @@ if(isset($_POST['ajouter'])){
 
 
                  <div class="d-grid gap-2">
-                <button class="btn btn-primary"name='ajouter' type="submit">Enregistrer</button>
+                <button class="boton"name='ajouter' type="submit">Enregistrer</button>
                 
                 </div>
               

@@ -45,7 +45,7 @@ function inscription($nom, $prenom, $utilisateur, $email, $adresse, $motdepasse,
         } else {
             $sql = "INSERT INTO user VALUES (NULL,'$utilisateur','$email','$motdepasseencript','$nom','$prenom','$adresse','$adresse','$token',3)";
 
-            if ($conn->query($sql) === TRUE) {
+            if (mysqli_query($conn, $sql)=== TRUE){
                 echo "<li></strong>Félicitations! Vos données ont été enregistrées avec succès!</strong></li>";
                 header('Location: ../Formulaires/connexion.php');
             } else {
@@ -55,7 +55,7 @@ function inscription($nom, $prenom, $utilisateur, $email, $adresse, $motdepasse,
     }
 
     // Fermer la connexion
-    $conn->close();
+    mysqli_close($conn);
 }
 
 
@@ -65,9 +65,9 @@ function getProduit()
 {
     $conn = connexionDB();
     $sql = "SELECT * FROM product";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $resultats = $stmt->get_result();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_execute($stmt);
+    $resultats = mysqli_stmt_get_result($stmt);
     $produits = array();
     foreach ($resultats as $produit) {
         $produits[] = $produit;
@@ -80,14 +80,12 @@ function getimage($id)
 {
     $conn = connexionDB();
     $sql = 'SELECT * FROM product WHERE id = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
 
-    $resultat = $stmt->get_result();
-
-    $image = $resultat->fetch_assoc();
-
+    $resultat = mysqli_stmt_get_result($stmt);
+    $image = mysqli_fetch_assoc($resultat);
     $ruta = $image["img_url"];
     return $ruta;
 
@@ -101,11 +99,11 @@ function updateProduit($nomProduit,$description,$prix,$quantity,$idproduit,$imag
 
 
     $sql = 'UPDATE product set name=?, description=?, price =?, quantity=? where id = ? ';
-    $stm = $conn->prepare($sql);
-    $stm->bind_param("ssdii", $nomProduit, $description, $prix, $quantity, $idproduit);
-    $resultado = $stm->execute();
-    $stm->close();
-    $conn->close();
+    $stm = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stm,"ssdii", $nomProduit, $description, $prix, $quantity, $idproduit);
+    $resultado=mysqli_stmt_execute($stm);
+    mysqli_stmt_close($stm);
+    mysqli_close($conn);
     header('Location: ../Formulaires/gestionProduits.php');
 
 
@@ -128,10 +126,10 @@ function updateImage($chemin, $idproduit)
 {
     $conn = connexionDB();
     $sql = 'UPDATE product SET img_url=? where  id=?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $chemin, $idproduit);
-    $stmt->execute();
-    $resultat = $stmt->get_result();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "si", $chemin, $idproduit);
+    mysqli_stmt_execute($stmt);
+    $resultat = mysqli_stmt_get_result($stmt);
     if ($resultat) {
         var_dump($resultat);
         header("Location:../Formulaire/gestionProduits.php");
@@ -140,20 +138,17 @@ function updateImage($chemin, $idproduit)
     }
 
 }
-
-
-
 function getProduitById($id)
 {
 
     $conn = connexionDB();
 
     $sql = 'SELECT * from product where id = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-    $resultat = $stmt->get_result();
-    $produit = $resultat->fetch_assoc();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt,'i', $id);
+    mysqli_stmt_execute($stmt);
+    $resultat = mysqli_stmt_get_result($stmt);
+    $produit = mysqli_fetch_assoc($resultat);
     return $produit;
 }
 
@@ -163,27 +158,23 @@ function getAdresseById($id)
     $conn = connexionDB();
 
     $sql = 'SELECT * from address where id = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-    $resultat = $stmt->get_result();
-    $adresse = $resultat->fetch_assoc();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt,'i', $id);
+    mysqli_stmt_execute($stmt);
+    $resultat = mysqli_stmt_get_result($stmt);
+    $adresse = mysqli_fetch_assoc($resultat);
     return $adresse;
 }
-
-
-
-
 
 function effacerProduit($id)
 {
     $conn = connexionDB();
     $sql = 'DELETE FROM product WHERE id=?';
-    $stm = $conn->prepare($sql);
-    $stm->bind_param('i', $id);
-    $resultado = $stm->execute();
-    $stm->close();
-    $conn->close();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt,'i', $id);
+    $resultado = mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
 
     if ($resultado) {
         //header permet de rediriger le fichier // là où vous devez l'envoyer
@@ -195,41 +186,23 @@ function effacerProduit($id)
 
 }
 
-
 function ajouterProduit($nameproduct, $description, $price, $quantity, $urlimage)
 {
     $conn = connexionDB();
 
     //création de requête
-    $sql = 'INSERT INTO product (id, name, quantity, price, img_url, description) VALUES (NULL,?,?,?,?)';
+    $sql = "INSERT INTO product (id, name, quantity, price, img_url, description) VALUES (NULL,'$nameproduct','$quantity','$price','$urlimage','$description')";
 
-    $stm = $conn->prepare($sql);
-    //para evitar inyeccion sql pide el tipo de los datos
-    $stm->bind_param('isidss', NULL, $nameproduct, $quantity, $price, $urlimage, $description);
-    $resultado = $stm->execute(); //return un boolean
-    $idproduits = $conn->insert_id;
-    $stm->close();
-    $conn->close();
-
-
-
-    var_dump($resultado);
-    var_dump($urlimage);
-    if ($resultado == "1") {
-
-        if ($urlimage != "") {
-
-            registrerImage($idproduits, $urlimage);
-        }
-        header('Location: ../Formulaires/gestionProduit.php');
-
-    } else {
-        echo 'Erreur';
-    }
-
+    $stm = mysqli_prepare($conn, $sql);
+    $resultado = mysqli_stmt_execute($stm); //return un boolean
+    $idproduits = mysqli_insert_id($conn);
+    mysqli_stmt_close($stm);
+    mysqli_close($conn);
+    
+    echo("Produit ajouté avec succès!");
+    header('Location: ../Formulaires/gestionProduits.php');
 
 }
-
 
 function getUsers()
 {
@@ -241,15 +214,14 @@ function getUsers()
  inner join role r on u.role_id = r.id';
 
 
-    $stm = $conn->prepare($sql);
-    $stm->execute();
-    $resultados = $stm->get_result(); // obtient tous les résultats obtenus de l'exécution
-    //variable type table
+    $stm = mysqli_prepare($conn, $sql);
+    mysqli_stmt_execute($stm);
+    $resultados = mysqli_stmt_get_result($stm); // obtient tous les résultats obtenus de l'exécution
     $users = array();
     
     foreach ($resultados as $user) {
         $users[] = $user;
-    } //returna una tabla de usuarios
+    }
     return $users;
 
 
@@ -259,13 +231,13 @@ function getUserById($id)
 {
     $conn = connexionDB();
     $sql = 'SELECT * FROM user WHERE id = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt,"i", $id);
+    mysqli_stmt_execute($stmt);
 
-    $resultat = $stmt->get_result();
+    $resultat = mysqli_stmt_get_result($stmt);
     //
-    $user = $resultat->fetch_assoc();
+    $user = mysqli_fetch_assoc($resultat);
     return $user;
 
 }
@@ -283,42 +255,38 @@ function getUserByUsername(string $user_name)
     return $user_name;
 }
 
-function updateUser($username,$email, $motdepasse, $prenom, $nom, $rol)
+function updateUser($id,$user_name,$email, $prenom, $nom, $rol)
 {
     $conn = connexionDB();
+    $query = "UPDATE user SET user_name=?, email=?, fname=?, lname=?, role_id=? where id=?";
+    if ($stmt = mysqli_prepare($conn, $query)){
+     mysqli_stmt_bind_param($stmt,"ssssii", $user_name, $email, $prenom, $nom, $rol,$id); 
+     $result=mysqli_stmt_execute($stmt);
+         
+    header('Location: ../Formulaires/gestionUsers.php');
 
-    $sql = 'UPDATE user set user_name=?, email=?, pwd=?, fname=?, lname=?, role_id =? where id = ?';
-    $stm = $conn->prepare($sql);
-    $stm->bind_param("sssssi", $username, $email, $motdepasse, $prenom, $nom, $rol);
-    $resultado = $stm->execute();
-
-    $stm->close();
-    $conn->close();
-
-    if ($resultado) {
-        //header permire rediriger el ficher// donde necesita enviarlo
+    if ($result== "1") {
+       
         header('Location: ../Formulaires/gestionUsers.php');
 
     } else {
         echo 'Erreur';
     }
-
 }
-
+}
 
 function effacerUser($id)
 {
 
     $conn = connexionDB();
     $sql = 'DELETE FROM user WHERE id=?';
-    $stm = $conn->prepare($sql);
-    $stm->bind_param('i', $id);
-    $resultado = $stm->execute();
-    $stm->close();
-    $conn->close();
+    $stm = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stm,'i', $id);
+    $resultado = mysqli_stmt_execute($stm);
+    mysqli_stmt_close($stm);
+    mysqli_close($conn);
 
     if ($resultado) {
-        //header permire rediriger el ficher// donde necesita enviarlo
         header('Location: ../Formulaires/gestionUsers.php');
 
     } else {
@@ -332,11 +300,11 @@ function supprimerProduit($id)
 {
     $conn = connexionDB();
     $sql = 'DELETE from product  where id = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
-    $resultat = $stmt->execute();
-    $stmt->close();
-    $conn->close();
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt,'i', $id);
+    $resultat = mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
 
     if ($resultat) {
         header('Location: ../Formulaires/gestionProduits.php');
