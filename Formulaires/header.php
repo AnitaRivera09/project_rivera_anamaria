@@ -59,7 +59,7 @@ if (isset($_SESSION['utilisateur'])) {
         <?php
 
                     
-          // verifica si el id role que trae la sesión es admin
+          // vérifiez si l'identifiant de rôle qui amène la session est superadmin (1)
            if ($utilisateur['role_id'] === 1) {
             ?>
 
@@ -69,12 +69,16 @@ if (isset($_SESSION['utilisateur'])) {
 
 
             <?php
-          } else {
-            ?>
-            <li> <a class="a" href="../naturel/Naturel.html"><i class="fa-solid fa-cart-shopping"></i></i></a>
+          } else
+           // vérifiez si l'identifiant de rôle qui amène la session est client (3)
+            if ($utilisateur['role_id'] === 3) {
+              ?>
+  
+              <a class="a" href="modifierClient.php">Modifier mes données</a>
+            
               <?php
-          }
-        
+            
+          }                  
 
         ?>
           <a class="a" href="../Formulaires/logout.php">Deconnexion</a>
@@ -108,6 +112,5 @@ if (isset($_SESSION['utilisateur'])) {
     </div>
   </header>
   </div>
-    <div id="templatemo_footer">Copyright © 2023 <a href="#">Magazin Riveranis</a> 
-    <!-- Credit: www.templatemo.com --></div>
+    <div id="templatemo_footer">Copyright © 2023 <a href="#">Magazin Riveranis</a>
 </div>

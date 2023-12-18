@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: rgb(244, 190, 217);
+  background-color: rgb(248, 210, 229);
   display: flex;
   flex-direction: column;
 }
@@ -18,6 +18,13 @@ body {
   text-align: center;
   justify-content: center;
   color: rgb(155, 89, 182);
+}
+
+h4 {
+  font-family: "Ink Free";
+  font-size: 20px;
+  color: #d16dc9;
+  margin: 15px;
 }
 
 h1 {
@@ -73,7 +80,7 @@ td {
 }
 
 .H {
-  font-family: Arial;
+  font-family: "Ink Free";
   font-size: 20px;
   color: #d1976d;
   margin: 0;
@@ -101,9 +108,9 @@ nav {
 .a {
   position: relative;
   text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(255, 0, 251);
-  font-size: 16px;
+  font-family: "Ink Free";
+  color: rgb(113, 13, 109);
+  font-size: 22px;
   padding: 0 10px;
 }
 
