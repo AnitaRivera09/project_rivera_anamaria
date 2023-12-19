@@ -20,6 +20,7 @@ if (isset($_SESSION['utilisateur'])) {
 }
 
 $produit = getProduitById('id');
+var_dump($produit);
 
 if (isset($_GET['id'])) {
     $idproduit = $_GET['id'];

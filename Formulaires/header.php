@@ -65,6 +65,7 @@ if (isset($_SESSION['utilisateur'])) {
 
             <a class="a" href="gestionProduits.php">Gestion Produit</a>
             <a class="a" href="ajouterProduit.php">Ajouter Produit</a>
+            <a class="a" href="ajouterAdresse.php">Ajouter Adresse</a>
             <a class="a" href="gestionUsers.php">Gestion Utilisateur</a>
 
 

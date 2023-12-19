@@ -28,21 +28,21 @@ if (isset($_POST['send'])) {
         // Corrige la consulta SQL
         $sql = 'SELECT * FROM user WHERE user_name = ?';
         
-        $result = $conn->prepare($sql);
+        $result = mysqli_prepare($conn, $sql);
 
         // Verifica si la preparación de la consulta fue exitosa
         if (!$result) {
-            die("Error en la preparación de la consulta: " . $conn->error);
+            die("Error en la preparación de la consulta: " . mysqli_error($conn));
         }
 
-        $result->bind_param("s", $utilisateur);
-        $result->execute();
+        mysqli_stmt_bind_param($result,"s", $utilisateur);
+        mysqli_stmt_execute($result);
         
         // Obtiene el resultado de la consulta
-        $result = $result->get_result();
+        $result = mysqli_stmt_get_result($result);
 
-        if ($result->num_rows >= 1) {
-            $utilisateur = $result->fetch_assoc();
+        if (mysqli_num_rows($result) >= 1) {
+            $utilisateur = mysqli_fetch_assoc($result);
             
             // Verifica la contraseña utilizando password_verify
             if (password_verify($motdepasse, $utilisateur['pwd'])) {

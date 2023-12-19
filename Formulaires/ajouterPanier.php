@@ -49,7 +49,7 @@ if (isset($_GET['id'])) {
     </div>
     <body>
     <main>
-        <?php foreach ($tab as $id => $qte) {
+        <?php foreach ($id as $id => $qte) {
             $produit = getProduitById($id); ?>
 
             <div class="card">

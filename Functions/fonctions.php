@@ -142,10 +142,9 @@ function getProduitById($id)
 {
 
     $conn = connexionDB();
-
-    $sql = 'SELECT * from product where id = ?';
+    $sql = 'SELECT * FROM product WHERE id = ?';
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt,'i', $id);
+    mysqli_stmt_bind_param($stmt,"i", $id);
     mysqli_stmt_execute($stmt);
     $resultat = mysqli_stmt_get_result($stmt);
     $produit = mysqli_fetch_assoc($resultat);
@@ -184,6 +183,23 @@ function effacerProduit($id)
         echo 'Erreur';
     }
 
+}
+
+function ajouterAdresse($streetName,$streetNb,$city,$province,$zipCode,$country){
+
+    $conn = connexionDB();
+
+    //création de requête
+    $sql = "INSERT INTO address (id, street_name, street_nb, city, province, zip_code, country) VALUES (NULL,'$streetName','$streetNb','$city','$province','$zipCode','$country')";
+
+    $stm = mysqli_prepare($conn, $sql);
+    $resultado = mysqli_stmt_execute($stm); //return un boolean
+    $idproduits = mysqli_insert_id($conn);
+    mysqli_stmt_close($stm);
+    mysqli_close($conn);
+    
+    echo("Adresse ajouté avec succès!");
+    header('Location: ../Formulaires/home.php');
 }
 
 function ajouterProduit($nameproduct, $description, $price, $quantity, $urlimage)
