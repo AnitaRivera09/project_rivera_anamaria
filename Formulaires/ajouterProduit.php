@@ -86,8 +86,7 @@ if(isset($_POST['ajouter'])){
                  <label for="image">Choisize une image :</label>
                  <input type="file" name="image" id="image">
                     
-                </div>
-              
+                </div>          
 
 
                  <div class="d-grid gap-2">

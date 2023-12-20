@@ -19,14 +19,13 @@ if (isset($_SESSION['utilisateur'])) {
     exit;
 }
 
-$produit = getProduitById('id');
-var_dump($produit);
-
 if (isset($_GET['id'])) {
     $idproduit = $_GET['id'];
     $produit = getProduitById($idproduit);
 
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -68,19 +67,25 @@ if (isset($_GET['id'])) {
 
                     
           // verifica si el id role que trae la sesión es admin
-           if ($utilisateur['role_id'] === 1) {
+          if ($utilisateur['role_id'] === 1) {
             ?>
 
             <a class="a" href="gestionProduits.php">Gestion Produit</a>
             <a class="a" href="ajouterProduit.php">Ajouter Produit</a>
+            <a class="a" href="ajouterAdresse.php">Ajouter Adresse</a>
             <a class="a" href="gestionUsers.php">Gestion Utilisateur</a>
 
 
             <?php
-          } else {
-            ?>
-            <li> <a class="a" href="../naturel/Naturel.html"><i class="fa-solid fa-cart-shopping"></i></i></a>
+          } else
+           // vérifiez si l'identifiant de rôle qui amène la session est client (3)
+            if ($utilisateur['role_id'] === 3) {
+              ?>
+  
+              <a class="a" href="modifierClient.php">Modifier mes données</a>
+            
               <?php
+            
           }
         
 
@@ -122,21 +127,19 @@ if (isset($_GET['id'])) {
               </br>
                </br>
                </br>
-            </p>
+               </p>
                <p class="price"><b>$
                     <?php echo $produit['price']; ?>
                     </b></p>
                 <input type="number" name="quantite" min="0" max=<?php echo $produit['quantity']; ?>>
-
                 <input type="submit" value="Ajouter au panier" class="boton" name="envoyer">
                 <input type="hidden" name="id" value="<?php echo $produit['id']; ?>">
-                <a href="acheter.php"><button class="boton">acheter</button></a>
+              </form>  
        </fieldset>         
     </section>
 </td>
 </tr>
 </table>
-    </form>
 </main>
 </body>
 

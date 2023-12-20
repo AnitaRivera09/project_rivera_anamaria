@@ -1,8 +1,8 @@
 <?php
 include "../Functions/fonctions.php";
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
     $produit = getProduitById($id);
     $quantiteDemande = $_POST['quantity'];
     addCard($id, $quantiteDemander);
@@ -49,8 +49,7 @@ if (isset($_GET['id'])) {
     </div>
     <body>
     <main>
-        <?php foreach ($id as $id => $qte) {
-            $produit = getProduitById($id); ?>
+        
 
             <div class="card">
                 <div class="images">
@@ -82,6 +81,5 @@ if (isset($_GET['id'])) {
 
                 </div>
             </div>
-        <?php } ?>
     </main>
 </body>

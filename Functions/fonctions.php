@@ -58,9 +58,6 @@ function inscription($nom, $prenom, $utilisateur, $email, $adresse, $motdepasse,
     mysqli_close($conn);
 }
 
-
-
-
 function getProduit()
 {
     $conn = connexionDB();
@@ -140,7 +137,6 @@ function updateImage($chemin, $idproduit)
 }
 function getProduitById($id)
 {
-
     $conn = connexionDB();
     $sql = 'SELECT * FROM product WHERE id = ?';
     $stmt = mysqli_prepare($conn, $sql);
@@ -205,19 +201,25 @@ function ajouterAdresse($streetName,$streetNb,$city,$province,$zipCode,$country)
 function ajouterProduit($nameproduct, $description, $price, $quantity, $urlimage)
 {
     $conn = connexionDB();
-
-    //création de requête
-    $sql = "INSERT INTO product (id, name, quantity, price, img_url, description) VALUES (NULL,'$nameproduct','$quantity','$price','$urlimage','$description')";
+    $sql = "INSERT INTO product (id, name, quantity, price, img_url, description) VALUES (NULL,?,?,?,?,?)";
 
     $stm = mysqli_prepare($conn, $sql);
-    $resultado = mysqli_stmt_execute($stm); //return un boolean
-    $idproduits = mysqli_insert_id($conn);
+    if (!$stm) {
+        die('Erreur: ' . mysqli_error($conn));
+    }
+    mysqli_stmt_bind_param($stm, "ssdss", $nameproduct, $quantity, $price, $urlimage, $description);
+    $resultado = mysqli_stmt_execute($stm);
+
+    if ($resultado) {
+        $idproduits = mysqli_insert_id($conn);
+        echo "Produit ajouté avec succès!";
+        header('Location: ../Formulaires/gestionProduits.php');
+    } else {
+        die('Error al ejecutar la consulta: ' . mysqli_error($conn));
+    }
+
     mysqli_stmt_close($stm);
     mysqli_close($conn);
-    
-    echo("Produit ajouté avec succès!");
-    header('Location: ../Formulaires/gestionProduits.php');
-
 }
 
 function getUsers()
@@ -332,7 +334,7 @@ function addCard($id, $quantiteDemander)
 {
     $_SESSION['panier'][$id] = $quantiteDemander;
 
-    header('Location: ../Formulaires/produit.php');
+    header('Location: ../Formulaires/ajouterPanier.php');
 }
 function countElementPanier()
 {

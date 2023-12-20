@@ -30,7 +30,7 @@ include "../Formulaires/header.php";
           </b></p>
 
       </div>
-      <button class="boton">Ajouter au panier</button>
+      <a href="ajouterPanier.php?id=<?php echo $produit['id']; ?>"><button class="boton">Ajouter au panier</button>
     </div>
   <?php } ?>
 </main>

@@ -49,9 +49,9 @@ if (isset($_POST['ajouterPanier'])) {
       </nav>
     </div>
     <section>
-        <h1>Modifier </h1>
+        <h1>Produits Sélectionnés </h1>
 
-        <form method="post">
+        <form method="post" action="../Formulaires/panier.php?id=<?php echo $produit['id']; ?>">
 
             <div class="mb-3">
                 <label for="nom_produit" class="form-label">Nom produit</label>
@@ -68,7 +68,7 @@ if (isset($_POST['ajouterPanier'])) {
             </div>
             <div class="mb-3">
                 <label for="quantiteD" class="form-label">Quantite Demander</label>
-                <input type="number" name="quantiteD" class="form-control" max="<?php echo $produit['quantiteD']; ?>">
+                <input type="number" name="quantiteD" class="form-control" max="<?php echo $produit['quantity']; ?>">
             </div>
             <label for="descreption" class="form-label">Description</label>
             <div class="form-floating">
