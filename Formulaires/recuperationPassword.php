@@ -6,42 +6,24 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
-if (isset($_GET['id'])) {
-  $idAdresse = $_GET['id'];
-  $adresse = getAdresseById($idAdresse);
+// Verifica si se ha enviado el formulario
+if (isset($_POST['envoyer'])) {
+    $utilisateur = $_POST['utilisateur'];
+    $motdepasse=$_POST['motdepasse'];
+    $cmotdepasse=$_POST['cmotdepasse'];
+    
 
-}
-//conexion a la bd
-$dbhost ="localhost";
-$dbuser = "root";
-$dbpassword = "";
-$dbname = "ecom1_project";
-
-
- // verification des donnees
- if (isset($_POST['envoyer'])) {
-  //  recuperation des donnees de mon formulaire
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$utilisateur =$_POST['utilisateur'];
-$email = $_POST['email'];
-$adresse =$_POST['adresse'];
-$motdepasse = $_POST['motdepasse'];
-$cmotdepasse = $_POST['cmotdepasse'];
-$token=0;
-// verification des donnees
-if ($motdepasse === $cmotdepasse) {
-  
-       inscription($nom,$prenom,$utilisateur,$email,$adresse,$motdepasse,$token);
-           
+    if (!empty($utilisateur)||!empty($motdepasse)||!empty($cmotdepasse)) {
+          
+                recuperationPassword($utilisateur,$motdepasse);         
 
                   }
                   else{
                     echo("Le Mot de Passe et la confirmation ne sont pas les mêmes, merci de valider!"); 
                   }
 
-              }
-          
+              } 
+        
 
 ?>
 <!DOCTYPE html>
@@ -131,7 +113,7 @@ if ($motdepasse === $cmotdepasse) {
                        <td><input type="password" name="cmotdepasse" class="form-control" id="cmotdepasse"></td>
                     </tr>
                     <tr>
-                      <td colspan="2"><input type="submit" value="Inscription" class="boton" name="envoyer" required></td>
+                      <td colspan="2"><input type="submit" value="Changer le mot de passe" class="boton" name="envoyer" required></td>
                     </tr>
             <tr>
               <td>

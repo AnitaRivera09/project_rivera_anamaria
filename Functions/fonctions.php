@@ -58,6 +58,70 @@ function inscription($nom, $prenom, $utilisateur, $email, $adresse, $motdepasse,
     mysqli_close($conn);
 }
 
+function recuperationPassword($utilisateur, $motdepasse)
+{
+    $conn = connexionDB();
+
+    $utilisateur = mysqli_real_escape_string($conn, $utilisateur);
+    $motdepasse = mysqli_real_escape_string($conn, $motdepasse);
+    $motdepasseencript = password_hash($motdepasse, PASSWORD_BCRYPT);
+
+    // Verificación si el usuario existe en la base de datos
+    $sql = 'SELECT * FROM user WHERE user_name = ?';
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if (!$stmt) {
+        die("Erreur lors de la préparation de la requête : " . mysqli_error($conn));
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $utilisateur);
+    mysqli_stmt_execute($stmt);
+
+    // Obtener el resultado de la consulta preparada
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result === false) {
+        die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
+    }
+
+    // Intenta obtener la fila
+    $userData = mysqli_fetch_assoc($result);
+
+    if ($userData !== null) {
+        // El usuario existe, proceder con la actualización de la contraseña
+        $updateSql = "UPDATE user SET pwd=? WHERE user_name=?";
+        
+        // Preparar la consulta
+        $updateStmt = mysqli_prepare($conn, $updateSql);
+
+        if (!$updateStmt) {
+            die("Erreur lors de la préparation de la requête : " . mysqli_error($conn));
+        }
+
+        // Vincular valores a los marcadores de posición
+        mysqli_stmt_bind_param($updateStmt, "ss", $motdepasseencript, $utilisateur);
+
+        // Ejecutar la consulta preparada
+        if (mysqli_stmt_execute($updateStmt)) {
+            echo "<li>Le changement de mot de passe a réussi</li>";
+            header('Location: ../Formulaires/connexion.php');
+        } else {
+            echo "Erreur lors de l'enregistrement: " . mysqli_error($conn);
+        }
+
+        // Cerrar la consulta preparada de actualización
+        mysqli_stmt_close($updateStmt);
+    } else {
+        echo "L'utilisateur avec $utilisateur n'existe pas";
+    }
+
+    // Cerrar la conexión
+    mysqli_close($conn);
+}
+
+
+
+
 function getProduit()
 {
     $conn = connexionDB();
