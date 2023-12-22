@@ -334,7 +334,7 @@ function addCard($id, $quantiteDemander)
 {
     $_SESSION['panier'][$id] = $quantiteDemander;
 
-    header('Location: ../Formulaires/ajouterPanier.php');
+    header('Location: ../Formulaires/panier.php');
 }
 function countElementPanier()
 {

@@ -1,11 +1,35 @@
 <?php
 include "../Functions/fonctions.php";
 
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+if (session_status() == PHP_SESSION_NONE) {
+  // Solo inicia la sesión si no está activa
+  session_start();
+}
+
+// Verifica si el usuario está autenticado
+if (isset($_SESSION['utilisateur'])) {
+    $utilisateur = $_SESSION['utilisateur'];
+    //var_dump ($_SESSION);
+} else {
+    // Si no está autenticado, redirige a la página de inicio de sesión
+    header('Location: ../Formulaires/connexion.php');
+    echo ("debe autenticarse");
+    exit;
+}
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
     $produit = getProduitById($id);
     $quantiteDemande = $_POST['quantity'];
     addCard($id, $quantiteDemander);
+
+}
+
+if (isset($_POST['id'])) {
+  $id = $_POST['id'];
+  $produit = getProduitById($id);
+  $quantiteDemande = $_POST['quantity'];
+  addCard($id, $quantiteDemander);
 
 }
 
@@ -48,8 +72,7 @@ if (isset($_POST['id'])) {
       </nav>
     </div>
     <body>
-    <main>
-        
+    <main>       
 
             <div class="card">
                 <div class="images">

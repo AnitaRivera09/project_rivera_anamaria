@@ -99,6 +99,11 @@ main .card button {
   height: "200";
 }
 
+.card img {
+  max-width: 100%; /* El ancho máximo es el 100% del contenedor */
+  height: auto; /* Mantén la relación de aspecto original */
+}
+
 main .card button:before {
   content: "";
   position: absolute;
@@ -131,4 +136,18 @@ main .card button:before {
   text-transform: uppercase; /*capitalización texto*/
   font-family: "Ink Free";
   border-radius: 50px; /*bordes redondos*/
+}
+.slidershow.middle .slides img {
+  max-width: 100%; /* El ancho máximo es el 100% del contenedor */
+  height: auto; /* Mantén la relación de aspecto original */
+  display: block; /* Elimina el espacio adicional por debajo de las imágenes */
+  margin: auto; /* Centra la imagen dentro del contenedor */
+}
+
+.image_produit img {
+  max-width: 50%; /* Establece el ancho máximo al 100% del contenedor */
+  height: auto; /* Mantiene la relación de aspecto original */
+  display: block; /* Elimina el espacio adicional por debajo de la imagen */
+  margin: auto; /* Centra la imagen dentro del contenedor */
+  max-height: 50px; /* Establece la altura máxima de la imagen (ajústala según tus necesidades) */
 }

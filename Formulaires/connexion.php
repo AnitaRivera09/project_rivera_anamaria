@@ -121,7 +121,7 @@ if (isset($_POST['send'])) {
                <td><input type="submit" name="send" class="boton" value="Connexion"></td>                           
              </tr><br>
              </table>
-             <span class="psw"><a href="../Mot de passe oublie/index.html">Oublie mot de passe?</a></span></br>
+             <span class="psw"><a href="../Formulaires/recuperationPassword.php">Oublie mot de passe?</a></span></br>
              <label id="1"><input type="checkbox" checked="checked" name="remember">Remember me</label></br>
              <span class="psw"><a href="../Formulaires/inscription.php">Cree un compte?</a></span></br>
         </fieldset>

@@ -123,7 +123,7 @@ if (isset($_GET['id'])) {
             </p>
             <p class="description">
               <?php echo $produit['description']; ?>
-              <form method="post" action="../Formulaires/ajouterPanier.php">
+              <form method="post" action="panier.php?id=<?php echo $produit['id']; ?>">
               </br>
                </br>
                </br>

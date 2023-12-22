@@ -1,6 +1,8 @@
 <?php
 
-include "../Functions/fonctions.php";
+include('../Functions/fonctions.php');
+
+countElementPanier()==0;
 
 if (session_status() == PHP_SESSION_NONE) {
     // Solo inicia la sesión si no está activa
@@ -17,27 +19,57 @@ if (session_status() == PHP_SESSION_NONE) {
       echo ("debe autenticarse");
       exit;
   }
-
-$tab = getAllPanier();
-
-if (isset($_GET['id'])) {
-    $idproduit = $_GET['id'];
-    $produit = getProduitById($idproduit);
-
+ 
+// Check if the cart is not set
+if (!isset($_SESSION['panier'])) {
+    $_SESSION['panier'] = array();
 }
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $produit = getProduitById($id);
-    $quantiteDemande = $_POST['quantity'];
-    addCard($id, $quantiteDemander);
-
+ 
+//  adding products to the cart
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
+    $product = $_POST['id'];
+    $price = $_POST['price'];
+ 
+    // Add the product to the cart
+    addToCart($product, $price);
 }
-
-
+ 
+//  removing product from the cart
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_from_cart'])) {
+    $productIdToRemove = $_POST['id'];
+ 
+    // Remove the product from the cart
+    removeFromCart($productIdToRemove);
+}
+ 
+// Function to add a product to the cart
+function addToCart($product, $price) {
+    if (!isset($_SESSION['panier'][$product])) {
+        $_SESSION['panier'][$product] = ['quantity' => 1, 'price' => $price];
+    } else {
+        $_SESSION['panier'][$product]['quantity']++;
+    }
+}
+ 
+// Function to remove a product from the cart
+function removeFromCart($product) {
+    if (isset($_SESSION['panier'][$product])) {
+        $_SESSION['panier'][$product]['quantity']--;
+ 
+        // Check if quantity is zero or less
+        if ($_SESSION['panier'][$product]['quantity'] <= 0) {
+            unset($_SESSION['panier'][$product]);
+        }
+       
+        // Check if the cart is empty after removing the product
+        if (empty($_SESSION['panier'])) {
+            unset($_SESSION['panier']);
+        }
+    }
+}
 ?>
-
-<!DOCTYPE html>
+ 
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -50,9 +82,10 @@ if (isset($_GET['id'])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../CSS/header.css" />
   <link rel="stylesheet" href="../CSS/style.css" />
-
   <title>Magazin . Riveranis</title>
 </head>
+
+
 <body>
   <header>
     <div class="livraison">
@@ -68,12 +101,22 @@ if (isset($_GET['id'])) {
       <nav>
         <a class="a" href="../Formulaires/home.php">Page Principal</a>
         <a class="a" href="../Formulaires/inscription.php">Inscription</a>
+        <a class="a" href="../Formulaires/connexion.php">Connexion</a>
         <a class="a" href="../Formulaires/panier.php">
           <?php echo countElementPanier(); ?><img src="https://images.vexels.com/media/users/3/200060/isolated/preview/e39eb7217c7b5157d2c9154564d76598-icono-de-carrito-de-compras-rosa.png" alt="Carrito de compras" class="cart-icon">
-        </a>
-
+        </a>     
+       
         <?php
-        // vérifiez si l'identifiant de rôle qui amène la session est superadmin (1)
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_from_cart'])) {
+            $productIdToRemove = $_POST['id'];
+ 
+                // Remove the product from the cart
+                removeFromCart($productIdToRemove);
+                 }
+
+                    
+          // vérifiez si l'identifiant de rôle qui amène la session est superadmin (1)
            if ($utilisateur['role_id'] === 1) {
             ?>
 
@@ -93,45 +136,17 @@ if (isset($_GET['id'])) {
             
               <?php
             
-          }
+          }                  
+
         ?>
-         </nav>
+          <a class="a" href="../Formulaires/logout.php">Deconnexion</a>
 
-    </div>    
 
+      </nav>
 <body>
-    <main>
-        <?php foreach ($tab as $id => $qte) {
-            $produit = getProduitById($id); ?>
-
-            <div class="card">
-                <div class="images">
-                    <a href=<?php echo $produit['id']; ?>>
-                        <?php $imag = getimage($produit['id']) ?>
-                        <img src=<?php echo $imag; ?>></a>
-                </div>
-                <div class="caption">
-
-                    <p class="product_name">
-                        <?php echo $produit['name']; ?>
-                    </p>
-                    <p class="price"><b>
-                            <?php echo $produit['price']; ?>
-                        </b></p>
-                    <p class="description"><b>
-                            <?php echo $produit['description']; ?>
-                        </b></p>
-                    <p class="quantity"><b> <input type="number" value="<?php echo $qte; ?>" min="0"
-                                max="<?php echo $produit['quantity']; ?>">
-
-                        </b></p>
-                    
-                    <a href="acheterProduit.php?id=<?php echo $produit['id']; ?>"> <button
-                            class="boton">Acheter</button></a>
-                    <div id="paypal-payment-button"></div>
-
-                </div>
-            </div>
-        <?php } ?>
-    </main>
+   
+    <div class="container mt-5">
+        <h1>Paiement réussi!</h1>
+       <h4> Votre paiement a été réussi, le produit arrivera dans les deux prochains jours à votre adresse enregistrée. Merci d'avoir fait vos achats chez Magazin Riveranis ! </h4>
 </body>
+</html>
